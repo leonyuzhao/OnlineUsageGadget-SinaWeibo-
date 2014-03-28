@@ -199,7 +199,7 @@ namespace OnlineUsageLogger
             Match match = reg.Match(responseContent);
             if (match.Groups.Count == 2)
             {
-                return (Convert.ToInt32(match.Groups[1].Value) != 1);
+                return (Convert.ToInt32(match.Groups[1].Value) == 1);
             }
             return false;
         }
