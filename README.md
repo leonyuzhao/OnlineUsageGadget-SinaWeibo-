@@ -1,8 +1,20 @@
 Online Usage Gadget [Sina Weibo]
 ================================
-1. **Logger**
 
-2. **Report**
+* **Logger**
+
+Logger engine contains two parts.
+
+Part I: Daily activity tracker
+
+This mode (Tracker) runs every 5 mins. It detects whether user is online or offline. If online status, the tracker will record the current time into a log file. If total recorded time is greater than defined quota (15 mins by default), an automated email will send to pre-defined address for notification purpose.
+
+Part II: Activity summary
+
+Everyday morning, the engine will run under (Logger) mode to summary and archive previous activities into database which is used for report purpose.
+
+
+* **Report**
 
 **Overview**
 
@@ -21,9 +33,44 @@ The report aspx page helps you to visualise your online usage data based on Logg
 
 Setup & Installation
 ====================
-1. **Logger**
 
-2. **Report**
+* **Logger**
+
+Add COM references of following items:
+
+  ```
+  Microsoft ActiveX Data Object 2.8 Library
+  Microsoft ADO Ext. 2.8 for DDL and Security
+  ```
+
+Modify web.config add following app setting record:
+  
+  ```
+  <add key="mode" value="#Tracker|Logger#" />
+  <add key="logpath" value="#LOGFILESAVEPATH#" />
+    
+  <add key="username" value="#EMAIL|WEIBOUSERNAME#" />
+  <add key="password" value="#EMAIL|WEIBOPASSWORD#" />
+  <add key="appkey" value="#WEIBODEVELOPERAPPKEY#" />
+  <add key="targetuid" value="#WEIBOUSERUID#" />
+  <add key="toaddress" value="#NOTIFYADDRESS#" />
+  <add key="ccaddress" value="#CCADDRESS#" />
+  <add key="hassentlogpath" value="#HASEMAILSENTLOGPATH#" />
+
+  <add key="archivepath" value="#LOGFILEARCHIVEPATH#"/>
+  <add key="mdbfile" value="#PROCESSEDDBPATH#"/>
+  <add key="connectstr" value="#CONNECTIONSTRING#"/>
+  ```
+  
+Make sure add following <a href="https://github.com/leonyuzhao/Utility-CodeSnippet-" target="_blank">references</a> into your project before compile. 
+
+  ```
+  IO.cs
+  Web.cs
+  Database.cs
+  ```
+  
+* **Report**
 
 Modify web.config add following app setting record:
   
